@@ -1,32 +1,17 @@
-use std::io;
-use std::cmp::Ordering;
-use rand::prelude::*;
 fn main() {
-    println!("Игра в загадки");
-    let secret_number = rand::rng().random_range(1..=100);
-    loop {
-        println!("Введите число");
-        let mut guess = String::new();
-        
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Ошибка чтения строки");
+  let x = 10;
+  println!("your x = {}",x);
+	let x = x+ 5;
+	{
+		let x = 30;
+		println!("your x = {}",x);
+	}
+println!("your x = {}",x);
+const THREE_HOURS: i32 = 60* 60 *3;
+println!("your 3 Hourse = {}",THREE_HOURS);
 
-        let guess:u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
-        };
-        println!("Ваше число {guess}");
-
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Мало"),
-            Ordering::Greater => println!("Много"),
-            Ordering::Equal => {
-                println!("Попал");
-                break;
-            },
-        }
-    }
-
+let spaces = "       ";
+let spaces = spaces.len();
+println!("your spaces = {}", spaces);
 
 }
