@@ -1,37 +1,47 @@
+use std::io;
 fn main() {
-  let x = 10;
-  println!("your x = {}",x);
-	let x = x+ 5;
-	{
-		let x = 30;
-		println!("your x = {}",x);
-	}
-println!("your x = {}",x);
-const THREE_HOURS: i32 = 60* 60 *3;
-println!("your 3 Hourse = {}",THREE_HOURS);
+ 
+ let tup:(u16, u32, f32) = (32, 12, 3.12);
+ let (a, b, c,) = tup;
+ println!("Кортеж tup {}, {}, {}", a, b, c);
+ let a = tup.0;
+ let b = tup.1;
+ let c = tup.2;
+ println!("Кортеж tup {}, {}, {}", a, b, c);
 
-let spaces = "       ";
-let spaces = spaces.len();
-println!("your spaces = {}", spaces);
+ let x=[1,2,3,4,5];
+ for (index, elm) in x.iter().enumerate() {
+	println!("Элемент номер {index} {elm}");
+ }
+ let months = ["January", "February", "March", "April", "May", "June",
+ 	"July", "August", "September", "October", "November", "Disember"];
+for (index, month) in months.iter().enumerate() {
+	println!("Элемент номер {index} {month}");
+ }
+ let d=[3;5];
+ for (index, var) in d.iter().enumerate() {
+	println!("Элемент номер {index} {var}");
+ }
+ let i = 1;
+ let first = d[i];
+ println!("This is first {}", first);
 
-let r:f32 = 3.0;
-println!("your var = {}", r);
-let r:u16 = 5/x;
-println!("your var = {}", r);
-let r:u32 = 12_506;
-println!("your var u32 = {}", r);
-let r:u16 = 1345;
-println!("your var u16 = {}", r);
-let r:u8 = 0xfa;
-println!("your var u8 = {}", r);
-let r:u8 = 0o77;
-println!("your var u8 oct = {}", r);
-let r:u8 = 0b10100010;
-println!("your var u8 bin = {}", r);
-let r:u8 = b'A';
-println!("your var u8 char = {}", r);
-let b:bool = true;
-println!("your var bool = {}", b);
-let c = 's';
-println!("your var char = {}", c);
+ println!("Inter month number");
+ let mut index = String::new();
+ io::stdin()
+ .read_line(&mut index)
+ .expect("Faild to read line");
+
+ let index:usize = index
+ 	.trim()
+ 	.parse()
+ 	.expect("This is not a number");
+let len = months.len();
+if index <= len {
+	let elm = months[index];
+	println!("Your month is {}", elm);
+} else {
+	println!("Индекс больше длины массива {}", len);
+}
+
 }
