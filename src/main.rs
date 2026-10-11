@@ -1,16 +1,23 @@
 
 fn main() {
-	let mut counter = 0;
-	
-	let result = loop {
-		counter += 1;
-		println!("counter{counter}");
-		if counter ==10 {
-			break counter * 2;
+	let mut count = 0;
+	'counting: loop {
+		println!("count {count}");
+		let mut remind = 10;
+			loop {
+				println!("remind {remind}");
+				if remind == 1 {
+					break;
+				}
+				if count == 3 {
+					break 'counting;
+				}
+				remind -=1;
+			};
+			count +=1;
 			
 		}
-		
-	};
-	println!("result {result}");
+		count += 1;
+		println!("final count {count}");
+	}
 	
-}
