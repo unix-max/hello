@@ -16,6 +16,9 @@ fn main() {
 	let a_fn=my_fn();
 	let bx = a_fn(10, 's');
 	println!("This is bx {bx}");
- 
+ // yThis is comment
+ //And Another comment
+ /*And many string commemt
+ this is many string comment */
 
 }
