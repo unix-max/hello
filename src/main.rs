@@ -1,57 +1,37 @@
-
-struct User {
-	activ: bool,
-	user_name: String,
-	email: String,
-	sign_in_count: u64,
+#[derive(Debug)]
+struct Restangl {
+	width: u32,
+	height: u32,
 }
-struct StrUser {
-	activ: bool,
-	user_name: &str,
-	email: &str,
-	sign_in_count: u64,
-}
-struct Color (i32, i32, i32);
-struct Point (i32, i32, i32);
-
-struct Alwaysiqual;
 fn main() {
-	let mut user1 = build_user(
-		String::from("Max Mdoy"),
-		String::from("unix_max@mail.ru"));
-	user1.email = String::from("max@mdoy.pro");
+	let width1 = 30;
+	let height1 = 50;
+	println!("Area {}", area(width1, height1));
 
-	let user2 = User {
-		activ: user1.activ,
-		user_name: String::from("Harry Harison"),
-		email: user1.email,
-		sign_in_count: 2,
-	};
-	let user3 = User {
-		email: String::from("Sveta Acrop"),
-		sign_in_count: 3,
-		..user1
-	};
-	let black = Color(0, 0, 0);
-	let origin = Point(0, 0, 0);
+	let rest1 =(30, 50);
+	println!("Area1 {}", area1(rest1));
 
-	let subject = Alwaysiqual;
-
-	let user4 = StrUser {
-		activ: true,
-		user_name: "Hello world",
-		email: "max@mdoy",
-		sign_in_count: 5,
+	let scale = 2;
+	let rest2 = Restangl {
+		width: dbg!(30 * scale),
+		height: 50,
 	};
+	println!("Area2 {}", area2(&rest2));
+	println!("Restangl {rest2:#?}");
+	dbg!(&rest2);
 }
 
 
-fn build_user (user_name: String, email: String) -> User {
-	User {
-		activ: true,
-		user_name,
-		email,
-		sign_in_count: 1,
-	}
+fn area (width: i32, height: i32) -> i32 {
+	width * height
+	
+}
+fn area1 (dimensions: (i32, i32)) -> i32 {
+	dimensions.0 * dimensions.1
+	
 }
 
+fn area2 (rest: &Restangl) -> u32 {
+	rest.width * rest.height
+	
+}
