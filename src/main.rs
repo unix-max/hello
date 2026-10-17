@@ -1,28 +1,32 @@
-enum IpAddr {
-		V4(u8, u8, u8, u8),
-		V6(String),
+enum Message {
+	Quit,
+	Move {x: i32, y: i32},
+	Write(String),
+	ChengeColor(i32,i32,i32),
+}
+struct QuitMessage;
+struct MoveMessage {
+	x:i32, y: i32,
+}
+struct WriteMessage(String);
+struct ChangeColorMessage(u32, u32, u32);
+impl Message {
+	fn call(&self) {
+
 	}
-struct Ipv4Addr{
-	addr: String,
 }
-struct Ipv6Addr {
-	addr: String,
-}
-enum IpAddr1 {
-	V4(Ipv4Addr),
-	V6(Ipv6Addr),
-}
+
 fn main() {
 	{
-		let home = IpAddr::V4(127,0,0,1);
-		let loopback= IpAddr::V6(String::from("::1"));
+	let msg = Message::Write(String::from("Hello"));
+	msg.call();
 
 	println!("Square ");
 	}
 	
 }
 
-fn route(ip_addr: IpAddr) {
+fn route() {
 
 }
 
