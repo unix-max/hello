@@ -15,14 +15,22 @@ impl Message {
 
 	}
 }
-
+enum Option<T> {
+	Some(T),
+	None,
+}
 fn main() {
 	{
 	let msg = Message::Write(String::from("Hello"));
 	msg.call();
-
+		let some_number = Option::Some(5);
+		let some_char = Option::Some('s');
+		let absent_number:Option<i32> = Option::None;
 	println!("Square ");
 	}
+	let num = Option::Some(5);
+	let num1 = 5;
+	let z = num + num1;
 	
 }
 
