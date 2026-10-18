@@ -1,25 +1,13 @@
 
 fn main() {
-	let roll = 9;
-	match roll {
-		3 => add_fancy_hat(),
-		7 => remove_fancy_hat(),
-		other => move_player(other),
+	let config_max = Some(3u8);
+	match config_max {
+		Some(max) => println!("Max config {max}"),
+		_ => ()
 	}
-	match roll {
-		3 => add_fancy_hat(),
-		7 => remove_fancy_hat(),
-		_ => rello(),
-	}
-	match roll {
-		3 => add_fancy_hat(),
-		7 => remove_fancy_hat(),
-		_ => (),
+	if let Some(max) = config_max {
+			println!("max config {max}");
 	}
 }
 
-fn add_fancy_hat() {}
-fn remove_fancy_hat () {}
-fn move_player(step:u8) {}
-fn rello() {}
 
