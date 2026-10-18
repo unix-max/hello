@@ -1,13 +1,31 @@
-
+#[derive(Debug)]
+enum UsState {
+		Alabama,
+  	Alaska,
+}
+enum Coin {
+	Penny,
+	Nickel,
+	Dime,
+	Quarter(UsState),	
+}
 fn main() {
-	let config_max = Some(3u8);
-	match config_max {
-		Some(max) => println!("Max config {max}"),
-		_ => ()
+	let mut count = 0;
+	let coin = Coin::Quarter(UsState::Alabama);
+	match &coin {
+		Coin::Quarter(state) => {
+			println!("coin state {state:?}");
+		},
+		_ => count +=1,
 	}
-	if let Some(max) = config_max {
-			println!("max config {max}");
+	println!("Count {count}");
+	//let coin = Coin::Quarter(UsState::Alabama);
+	if let Coin::Quarter(state) = coin {
+		println!("coin state {state:?}");
+	} else {
+		count +=1;
 	}
+	println!("Count {count}");
 }
 
 
