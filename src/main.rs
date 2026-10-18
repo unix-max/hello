@@ -1,40 +1,34 @@
-enum Message {
-	Quit,
-	Move {x: i32, y: i32},
-	Write(String),
-	ChengeColor(i32,i32,i32),
+#[derive(Debug)]
+enum usState {
+		Alabama,
+  	Alaska,
 }
-struct QuitMessage;
-struct MoveMessage {
-	x:i32, y: i32,
-}
-struct WriteMessage(String);
-struct ChangeColorMessage(u32, u32, u32);
-impl Message {
-	fn call(&self) {
-
-	}
-}
-enum Option<T> {
-	Some(T),
-	None,
+enum Coin {
+	Penny,
+	Nickel,
+	Dime,
+	Quarter(usState),	
 }
 fn main() {
-	{
-	let msg = Message::Write(String::from("Hello"));
-	msg.call();
-		let some_number = Option::Some(5);
-		let some_char = Option::Some('s');
-		let absent_number:Option<i32> = Option::None;
-	println!("Square ");
-	}
-	let num = Option::Some(5);
-	let num1 = 5;
-	let z = num + num1;
+	let coin = Coin::Quarter(usState::Alaska);
+	let price = coin_to_cents(coin);
+	println!("Coin price {}",  price);
 	
 }
 
-fn route() {
+fn coin_to_cents(coin: Coin) -> u8 {
+	match coin {
+		Coin::Penny => {
+			println!("Lucky penny");
+			1
+		},
+		Coin::Nickel => 5,
+		Coin::Dime => 10,
+		Coin::Quarter(state) => {
+			println!("State {state:?}");
+			25
+		},
+	}
 
 }
 
