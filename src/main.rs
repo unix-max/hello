@@ -1,18 +1,25 @@
 
 fn main() {
-	let five= Some(5);
-	let six = plus_one(five);
-	let none = plus_one(None);
-	//println!("Six {}", six);
-}
-
-fn plus_one(x:Option<i32>) -> Option<i32> {
-	match x {
-		None => None,
-		Some(add) => Some(add +1),
-		
+	let roll = 9;
+	match roll {
+		3 => add_fancy_hat(),
+		7 => remove_fancy_hat(),
+		other => move_player(other),
 	}
-
+	match roll {
+		3 => add_fancy_hat(),
+		7 => remove_fancy_hat(),
+		_ => rello(),
+	}
+	match roll {
+		3 => add_fancy_hat(),
+		7 => remove_fancy_hat(),
+		_ => (),
+	}
 }
 
+fn add_fancy_hat() {}
+fn remove_fancy_hat () {}
+fn move_player(step:u8) {}
+fn rello() {}
 
