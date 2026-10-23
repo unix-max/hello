@@ -12,24 +12,35 @@ pub fn hello() -> Asparagus {
     };
     asp
 }
-pub mod flower {
+pub(crate) mod flower {
     pub struct Rouse {
         pub list: u8,
         pub color: (u8, u8,u8),
     }
 }
+pub fn add_to_waitlist() {}
 
 pub mod front_of_house {
+    fn private_funct() {
+        println!("Hello from private house");
+        hosting::seat_at_table();
+        crate::add_to_waitlist();
+        self::hosting::add_to_waitlist();
+    }
+    
+
     pub mod hosting {
        pub fn add_to_waitlist() {}
 
-        fn seat_at_table() {}
+       pub fn seat_at_table() {
+            super::private_funct();
+        }
     }
 
-    mod serving {
-        fn take_order() {}
+    pub(super) mod serving {
+        pub(self) fn take_order() {}
 
-        fn serve_order() {}
+        pub fn serve_order() {}
 
         fn take_payment() {}
     }
@@ -37,5 +48,6 @@ pub mod front_of_house {
 pub fn eat_at_restarant() {
     crate::front_of_house::hosting::add_to_waitlist();
     front_of_house::hosting::add_to_waitlist();
+    
     
 }
