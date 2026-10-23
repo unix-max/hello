@@ -1,25 +1,47 @@
-
+use std::collections::HashMap;
 fn main() {
-	let s1 = String::from("hi");
-	//let s2= s1[1];
-	{
+	let mut scores = HashMap::new();
+	scores.insert(String::from("Blue"), 10);
+	scores.insert(String::from("Yellow"), 25);
 
-		let hello = String::from("Hola");
-		let hello = String::from("Привет");
-		//let answer = &hello[0];
-		let s =&hello[0..4];
-		println!("s {s}");
+	let team_name = String::from("Blue");
+	let score = scores.get(&team_name).copied().unwrap_or(0);
+	println!("Team {team_name} score {score}");
 
+	for (key, value) in &scores {
+		println!("team {key} score {value}");
 	}
 	{
-		let hello = "Привет";
-		for i in &mut hello.chars() {
-			println!("char {i}");
-		}
-		for i in &mut hello.bytes() {
-			println!("B {i}");
-		}
+		let field_name = String::from("Favorit color");
+		let field_value = String::from("Blue");
+		let mut map = HashMap::new();
+		map.insert(field_name, field_value);
+		//println!("{field_name}");
 	}
+	{
+		let mut scores = HashMap::new();
+	scores.insert(String::from("Blue"), 10);
+	scores.insert(String::from("Blue"), 25);
+	println!("{scores:?}");
+	}
+	{
+			let mut scores = HashMap::new();
+	scores.insert(String::from("Blue"), 10);
+
+	scores.entry(String::from("Blue")).or_insert(25);
+	scores.entry(String::from("Yellow")).or_insert(50);
+	println!("{scores:?}");
+	}
+	{
+		let text = "hello world wonderful world";
+		let mut map = HashMap::new();
+		for word in text.split_whitespace() {
+			let count = map.entry(word).or_insert(0);
+			*count +=1;
+		}
+		println!("{map:?}");
+	}
+	
 	println!("Count End");
 	
 }
