@@ -5,6 +5,7 @@ use std::fmt;
 //use std::io;
 //use std::io::Result as ioResult;
 use std::io::{self, Write, Result as ioResult};
+use std::collections::*;
 fn main() {
 	let a= hello();
 	let mut map: HashMap<u32, String> = HashMap::new();
