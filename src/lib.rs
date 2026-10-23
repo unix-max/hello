@@ -52,6 +52,9 @@ pub mod front_of_house {
     fn grome() {
         serving::serve_order();
     }
+		pub mod work {
+			pub fn cook() {}
+		}
 }
 mod back_office {
     pub struct Breakfast{
@@ -93,6 +96,7 @@ pub fn eat_at_restarant1(){
 }
 
 use crate::front_of_house::serving;
+pub use crate::front_of_house::work;
 
 mod customer{
 	use crate::front_of_house::hosting;
