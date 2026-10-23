@@ -1,62 +1,60 @@
-use std::collections::btree_map::Values;
 
-enum SpreadsheetCell {
-		Int(i32),
-		Float(f64),
-		String(String),
-	}
 fn main() {
-	let mut v: Vec<i32> = Vec::new();
-	v.push(5);
-	v.push(6);
-	v.push(7);
-	v.push(8);
+	let mut s = String::new();
+	let data = "initial content";
+	let s = data.to_string();
+	let s = "initial content".to_string();
+	let s = String::from("initial content");
 
-	let third = &v[2];
-	
-	println!("Third val {}", third);
-	v.push(10);
-
-	let third: Option<&i32> = v.get(2);
-	match third {
-		Some(third) => println!("third value {third}"),
-		None => println!("this is no third element"),
+	{
+		let hello = String::from("السلام عليكم");
+    let hello = String::from("Dobrý den");
+    let hello = String::from("Hello");
+    let hello = String::from("שלום");
+    let hello = String::from("नमस्ते");
+    let hello = String::from("こんにちは");
+    let hello = String::from("안녕하세요");
+    let hello = String::from("你好");
+    let hello = String::from("Olá");
+    let hello = String::from("Здравствуйте");
+    let hello = String::from("Hola");
 	}
-	
-	let third = &v[3];
-	println!("3 val {}", third);
-
-	let third: Option<&i32> = v.get(100);
-	match third {
-		Some(third) => println!("third value {third}"),
-		None => println!("this is no third element"),
+	{
+		let mut str =String::from("foo");
+		str.push_str("bar");
+		println!("str {str}");
 	}
-	for i in &mut v {
-		*i += 50;
-		println!("{i}");
+	{
+		let mut s1 =String::from("foo");
+		let s2 = "bar";
+		s1.push_str(s2);
+		println!("s1 {s1}, s2 {s2}");
 	}
-	for i in &v {
-		println!("{i}");
+	{
+	let mut s1 =String::from("lo");	
+	s1.push('l');
+	println!("s1 {s1}");
 	}
-
-	let row = vec![
-		SpreadsheetCell::Int(3),
-		SpreadsheetCell::Float(6.15),
-		SpreadsheetCell::String(String::from("blue")),
-	];
-	for i in &row {
-		match i {
-			SpreadsheetCell::Int(e) => {
-				println!("int {e}");
-			},
-			SpreadsheetCell::Float(e) => {
-				println!("Float {e}");
-			},
-			SpreadsheetCell::String(e) => {
-				println!("String {e}");
-			}
-		}
+	{
+		let s1 =String::from("Hello ");
+		let s2 =String::from("world");
+		let s3 = s1 + &s2;
+		println!("s3 {s3}");
 	}
-	println!("Count");
+	{
+		let s1 = String::from("tic");
+		let s2 = String::from("tac");
+		let s3 = String::from("toe");
+		let s = s1 + "-" + &s2 + "-" + &s3;
+		println!("s= {s}");
+	}
+	{
+		let s1 = String::from("tic");
+		let s2 = String::from("tac");
+		let s3 = String::from("toe");
+		let s = format!("{s1}-{s2}-{s3}");
+		println!("s= {s}");
+	}
+	println!("Count End");
 	
 }
