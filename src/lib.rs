@@ -23,39 +23,7 @@ fn delivery_order() {
 
 }
 
-pub mod front_of_house {
-    fn private_funct() {
-        println!("Hello from private house");
-        hosting::seat_at_table();
-        crate::add_to_waitlist();
-        self::hosting::add_to_waitlist();
-    }
-    
-
-    pub mod hosting {
-       pub fn add_to_waitlist() {}
-
-       pub fn seat_at_table() {
-            super::private_funct();
-        }
-    }
-
-    pub(super) mod serving {
-        pub(self) fn take_order() {}
-
-        pub fn serve_order() {
-            println!("serve_order");
-        }
-
-        fn take_payment() {}
-    }
-    fn grome() {
-        serving::serve_order();
-    }
-		pub mod work {
-			pub fn cook() {}
-		}
-}
+pub mod front_of_house;
 mod back_office {
     pub struct Breakfast{
       pub toast: String,
