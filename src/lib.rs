@@ -40,11 +40,17 @@ pub mod front_of_house {
     pub(super) mod serving {
         pub(self) fn take_order() {}
 
-        pub fn serve_order() {}
+        pub fn serve_order() {
+            println!("serve_order");
+        }
 
         fn take_payment() {}
     }
+    fn grome() {
+        serving::serve_order();
+    }
 }
+
 pub fn eat_at_restarant() {
     crate::front_of_house::hosting::add_to_waitlist();
     front_of_house::hosting::add_to_waitlist();
