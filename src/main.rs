@@ -1,45 +1,33 @@
 use std::collections::HashMap;
 fn main() {
-	let mut scores = HashMap::new();
-	scores.insert(String::from("Blue"), 10);
-	scores.insert(String::from("Yellow"), 25);
-
-	let team_name = String::from("Blue");
-	let score = scores.get(&team_name).copied().unwrap_or(0);
-	println!("Team {team_name} score {score}");
-
-	for (key, value) in &scores {
-		println!("team {key} score {value}");
-	}
+	
 	{
-		let field_name = String::from("Favorit color");
-		let field_value = String::from("Blue");
+		let mut numbers = vec![5, 2, 8, 1, 3, 12, 17, 11, 7];
+		numbers.sort();
+	//	let text = "hello world wonderful world";
 		let mut map = HashMap::new();
-		map.insert(field_name, field_value);
-		//println!("{field_name}");
-	}
-	{
-		let mut scores = HashMap::new();
-	scores.insert(String::from("Blue"), 10);
-	scores.insert(String::from("Blue"), 25);
-	println!("{scores:?}");
-	}
-	{
-			let mut scores = HashMap::new();
-	scores.insert(String::from("Blue"), 10);
-
-	scores.entry(String::from("Blue")).or_insert(25);
-	scores.entry(String::from("Yellow")).or_insert(50);
-	println!("{scores:?}");
-	}
-	{
-		let text = "hello world wonderful world";
-		let mut map = HashMap::new();
-		for word in text.split_whitespace() {
-			let count = map.entry(word).or_insert(0);
-			*count +=1;
+		let mut summ: i32 = 0;
+		let len = numbers.len();
+		let mut len1: i32 = 0;
+		match len.try_into() {
+			 Ok(val) => len1 = val,
+			 Err(_) => println!("Ошибка: значение usize слишком велико для i32"),				
 		}
+
+		for i in &numbers {
+			let count = map.entry(i).or_insert(0);
+			*count +=1;
+			summ +=i;
+		}
+		println!("{numbers:?}");
 		println!("{map:?}");
+		println!("Minimal {}",numbers.first().unwrap());
+		println!("Maximal {}", numbers.last().unwrap());
+		println!("srednee {}", numbers.last().unwrap()/2);
+		if len > 0 {
+			println!("median {}",numbers[len/2]);
+			println!("sred afriav {}", summ/len1);
+		} 
 	}
 	
 	println!("Count End");
