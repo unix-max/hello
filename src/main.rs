@@ -1,35 +1,43 @@
-use std::collections::HashMap;
+//use std::collections::HashMap;
 fn main() {
-	
-	{
-		let mut numbers = vec![5, 2, 8, 1, 3, 12, 17, 11, 7];
-		numbers.sort();
-	//	let text = "hello world wonderful world";
-		let mut map = HashMap::new();
-		let mut summ: i32 = 0;
-		let len = numbers.len();
-		let mut len1: i32 = 0;
-		match len.try_into() {
-			 Ok(val) => len1 = val,
-			 Err(_) => println!("Ошибка: значение usize слишком велико для i32"),				
-		}
 
-		for i in &numbers {
-			let count = map.entry(i).or_insert(0);
-			*count +=1;
-			summ +=i;
+	let source_text = "Tokio is an asynchronous runtime for the Rust programming language.
+		It provides the building blocks needed for writing networking applications.
+		It gives the flexibility to target a wide range of systems,
+		from large servers with dozens of cores to small embedded devices.";
+	let mut result_text = String::new();
+
+	let words: Vec<&str> = source_text.split_whitespace().collect();
+	for word in words {
+		let last_char = word.chars().last().unwrap();
+		let wd: &str = if is_punctuation(&last_char) {
+			let end_index = word.char_indices().next_back().map_or(0, |(i, _)| i);
+			&word[..end_index]
+		
+		} else { word };
+		let mut new_word = String::new();
+		for (index, c) in wd.chars().enumerate() {
+			if is_vowel(c) {
+				let rest_wd:String = wd.chars().skip(index).collect();
+				let a = format!("{}{}{}", rest_wd, new_word, "yu");
+				result_text.push_str(&a); 
+				break;
+			} else {
+				new_word.push(c);
+			}
 		}
-		println!("{numbers:?}");
-		println!("{map:?}");
-		println!("Minimal {}",numbers.first().unwrap());
-		println!("Maximal {}", numbers.last().unwrap());
-		println!("srednee {}", numbers.last().unwrap()/2);
-		if len > 0 {
-			println!("median {}",numbers[len/2]);
-			println!("sred afriav {}", summ/len1);
-		} 
+		if is_punctuation(&last_char) { 
+			result_text.push(last_char);
+		}
+		result_text.push_str(" ");
 	}
-	
-	println!("Count End");
-	
+	println!("{}", result_text);
+	println!("Count End");	
+}
+
+fn is_vowel(c: char) -> bool {
+    "aeiouAEIOU".contains(c)
+}
+fn is_punctuation(c: &char) -> bool {
+	".,!?:;-".contains(*c)
 }
