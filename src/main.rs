@@ -1,43 +1,133 @@
-//use std::collections::HashMap;
-fn main() {
+use std::collections::HashMap;
+use crossterm::event::{self, Event, KeyCode, KeyEventKind};
+use std::io::{self, Write };
 
-	let source_text = "Tokio is an asynchronous runtime for the Rust programming language.
-		It provides the building blocks needed for writing networking applications.
-		It gives the flexibility to target a wide range of systems,
-		from large servers with dozens of cores to small embedded devices.";
-	let mut result_text = String::new();
 
-	let words: Vec<&str> = source_text.split_whitespace().collect();
-	for word in words {
-		let last_char = word.chars().last().unwrap();
-		let wd: &str = if is_punctuation(&last_char) {
-			let end_index = word.char_indices().next_back().map_or(0, |(i, _)| i);
-			&word[..end_index]
-		
-		} else { word };
-		let mut new_word = String::new();
-		for (index, c) in wd.chars().enumerate() {
-			if is_vowel(c) {
-				let rest_wd:String = wd.chars().skip(index).collect();
-				let a = format!("{}{}{}", rest_wd, new_word, "yu");
-				result_text.push_str(&a); 
-				break;
-			} else {
-				new_word.push(c);
+fn main() -> io::Result<()> {
+	let mut depts: HashMap::<String, Vec<String>> = HashMap::new();
+	let mut select_dept:Option<String> = None; 
+	main_menu();
+	loop {
+		if let Ok(Event::Key(key_event)) = event::read() {
+			if key_event.kind == KeyEventKind::Press { 
+          match key_event.code {
+          	KeyCode::Char(c) => {
+							if select_dept.is_none() {
+								match c {
+									'1' => {
+										let input= input_dept("Введите название нового отдела: ")?;
+										let eploers: Vec<String> = Vec::new();
+										depts.insert(input, eploers);
+									}
+									'2' => {		
+										println!("{depts:?}");		 
+										}
+									'3' => {
+										let input= input_dept("Введите название отдела для удаления: ")?;
+										if let Some(dep_name) = depts.remove(&input) {
+											println!("Отдел удален");
+										} else  {
+											println!("Такого отдела нет");
+										}
+									}
+									'4' => {
+										select_dept= input_dept("Введите название выбираемого отдела: ").ok();
+										
+									}
+									_ => println!("Нажата другая клавиша: {:?}", key_event.code),
+								}
+								
+							} else {
+								
+								match c {
+									'1' => {
+										let input= input_dept("Введите ФИО нового сотрудника: ")?;
+										if let Some(vector_dept) = depts.get_mut(select_dept.as_deref().unwrap_or("")) {
+        							vector_dept.push(String::from(input)); 
+    								} else {
+        						println!("Ключ не найден!");
+										}
+									}
+									'2' => {
+										println!("{depts:?}");	
+									}
+									'3' => {
+											if let Some(vector_dept) = depts.get_mut(select_dept.as_deref().unwrap_or("")) {
+        								for (i, employee) in &mut vector_dept.iter().enumerate() {
+        									println!("Индекс: {}, Сотрудник: {}", i, employee);
+    										}
+												let input= input_dept("Введите номер сотрудника: ")?;
+													match input.parse::<usize>() {
+    												Ok(num) => {
+															vector_dept.remove(num);
+														},
+    												Err(e) => println!("Ошибка парсинга: {}", e),
+													}
+
+    								} else {
+        						println!("Ключ не найден!");
+										}
+										
+									}
+									'4' => {
+										select_dept = None;
+									}
+									_ => println!("Нажата другая клавиша: {:?}", key_event.code),
+								}
+							}
+							
+						}
+						KeyCode::Enter => {
+							if select_dept.is_none() {
+              main_menu();
+							} else {
+								user_menu(select_dept.as_deref().unwrap_or(""));
+							}
+            }
+            KeyCode::Esc => {
+              println!("Выход из программы.");
+                break;
+            }
+            _ => println!("Нажата другая клавиша: {:?}", key_event.code),
+          }
+						//print_menu();
+        }
 			}
-		}
-		if is_punctuation(&last_char) { 
-			result_text.push(last_char);
-		}
-		result_text.push_str(" ");
+
 	}
-	println!("{}", result_text);
-	println!("Count End");	
+
+	println!("Count End");
+	Ok(())
 }
 
-fn is_vowel(c: char) -> bool {
-    "aeiouAEIOU".contains(c)
+fn input_dept(text: &str) -> io::Result<String> {
+	print!("{text}");
+  io::stdout().flush()?;
+	let mut input = String::new();
+  io::stdin().read_line(&mut input)?;
+	let str_in = input.trim().to_string();										
+
+	Ok(str_in)
 }
-fn is_punctuation(c: &char) -> bool {
-	".,!?:;-".contains(*c)
+fn main_menu() {
+	print!("{}[2J{}[1;1H", 27 as char, 27 as char);
+	println!("Меню:
+	1. Создать новый отдел
+	2. Отобразить список отделов
+	3. Удалить отдел
+	4. Выбрать отдел
+	Нажимайте клавиши (Esc для выхода)...");
+
+}
+
+fn user_menu(dep: &str) {
+	print!("{}[2J{}[1;1H", 27 as char, 27 as char);
+	println!("Выбран отдел {}
+	Меню:
+	1. Создать нового сотрудника
+	2. Отобразить список сотрудников
+	3. Удалить сотрудника
+	4. Вернуться в основное меню
+	Нажимайте клавиши (Esc для выхода)...", dep);
+
 }
