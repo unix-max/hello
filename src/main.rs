@@ -6,11 +6,11 @@ struct Guess {
 	value: i32,
 }
 impl Guess {
-	fn new(val:i32) -> Self {
-		if val<1 || val >100 {
+	fn new(value:i32) -> Self {
+		if value<1 || value >100 {
 			panic!("value must be < 100 ");
 		} else {
-			Self {value: val}
+			Self {value}
 		}
 	}
 	pub fn value(&self) -> i32 {
