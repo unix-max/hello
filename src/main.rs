@@ -59,7 +59,12 @@ fn main() -> io::Result<()> {
 												let input= input_dept("Введите номер сотрудника: ")?;
 													match input.parse::<usize>() {
     												Ok(num) => {
-															vector_dept.remove(num);
+															if num < vector_dept.len() {
+																vector_dept.remove(num);
+															} else {
+																println!("Нет сотрудника с номером {num}");
+															}
+															
 														},
     												Err(e) => println!("Ошибка парсинга: {}", e),
 													}
