@@ -1,52 +1,45 @@
-use std::io;
-use std::cmp::Ordering;
-use rand::prelude::*;
 
-struct Guess {
-	value: i32,
-}
-impl Guess {
-	fn new(value:i32) -> Self {
-		if value<1 || value >100 {
-			panic!("value must be < 100 ");
-		} else {
-			Self {value}
-		}
-	}
-	pub fn value(&self) -> i32 {
-        self.value
-	}
-}
 fn main() {
-    println!("Игра в загадки");
-    let secret_number = rand::rng().random_range(1..=100);
-    loop {
-        println!("Введите число");
-        let mut guess = String::new();
-        
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Ошибка чтения строки");
+	let num_list = [1,2,3,4,5,6,7,8];
+	let result = biggest_i32(&num_list);
+	println!("Bigest int32 {result}");
 
-        let guess:Guess = match guess.trim().parse() {
-            // Ok(num) => num,
-						Ok(num) => Guess::new(num),
-            Err(_) => continue,
-        };
-        // println!("Ваше число {guess}");
-				// if guess<1 || guess >100 {
-				// 	println!("Ваше число должно быть в диаппазоне от 1 до 100");
-				// }
+	let char_list = ['a', 'b', 'c', 'e', 's'];
+	let result = biggest_char(&char_list);
+	println!("Bigest char {result}");
 
-        match guess.value.cmp(&secret_number) {
-            Ordering::Less => println!("Мало"),
-            Ordering::Greater => println!("Много"),
-            Ordering::Equal => {
-                println!("Попал");
-                break;
-            },
-        }
+	let result = bigest(&num_list);
+	println!("Bigest int32 {result}");
+	let result = bigest(&char_list);
+	println!("Bigest char {result}");
+}
+
+fn biggest_i32(list: &[i32]) -> &i32 {
+    let mut bigest = &list[0];
+    for num in list {
+      if num > &bigest {
+				bigest = num;
+			}
     }
+		bigest
+}
 
+fn biggest_char(list: &[char]) -> &char {
+    let mut bigest = &list[0];
+    for num in list {
+      if num > &bigest {
+				bigest = num;
+			}
+    }
+		bigest
+}
 
+fn bigest<T: PartialOrd>(list: &[T]) -> &T {
+	let mut bigest = &list[0];
+    for num in list {
+      if num > &bigest {
+				bigest = num;
+			}
+    }
+		bigest
 }
