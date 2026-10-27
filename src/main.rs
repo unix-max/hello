@@ -1,24 +1,35 @@
-
-fn main() {
-	let str1 = String::from("abcde");
-	let long: &str;
-	let long1: &str;
-	{
-	let str2 = String::from("xyz");
-	long = longest(&str1, &str2);
-	long1 = longest1(&str1, &str2);
-	println!("Longnest str {long}");
+use std::fmt::Display;
+struct ImportExp<'a> {
+	part: &'a str,
+}
+impl<'a> ImportExp<'a> {
+	fn level(&self) ->i32 {
+		3
 	}
-	println!("Longnest str {long1}");
+	fn anonce(&self, anons: &str) -> &str {
+		println!("Anonce {anons}");
+		&self.part
+	}
+}
+fn main() {
+	let novel = String::from("Call me Ismail. Some years ago...");
+	let first_sentense = novel.split('.').next().unwrap();
+	let i = ImportExp {part: first_sentense};
+	let s: &'static str = "I am static string";
 }
 
-fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
-	if a.len() > b.len() { a } else { b }
+fn first_world(s: &str) -> &str {
+	let bytes = s.as_bytes();
+	for (i, &item) in bytes.iter().enumerate() {
+		if item == b' ' {
+			return &s[0..i];
+		}	
+		
+	}
+	&s[..]
 }
-fn longest1<'a>(a: &'a str, b: & str) -> &'a str {
-	 a
-}
-fn longest2<'a>(a: &'a str, b: & str) -> &'a str {
-	let z =String::from("Hello");
-	z.as_str()
-}
+fn longest<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
+	where T: Display {
+		println!("Anonsment {ann}");
+		if x.len() > y.len() { x } else { y }
+	}
