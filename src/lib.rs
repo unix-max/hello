@@ -1,29 +1,19 @@
-pub fn add_two(a: i32) -> i32 {
-	println!("I got a value {a}");
-	internal_adder(a, 2)
+
+pub struct Config {
+	pub query: String,
+	pub file_path: String
+}
+impl Config {
+	pub fn build(args: &[String]) -> Result<Config, &'static str> {
+		if args.len() < 3 {
+			return Err("not enough arguments");
+		} 
+	let query = args[1].clone();
+	let file_path = args[2].clone();
+	Ok(Config {query, file_path})
+	} 
 }
 
-fn internal_adder(left: i32, right: i32) -> i32 {
-	left + right
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+	unimplemented!();
 }
-
-#[cfg(test)]
-mod tests {
-	use super::*;
-
-	#[test]
-	fn add_two_test() {
-		let res = add_two(2);
-		assert_eq!(res, 4);
-	}
-	#[test]
-	fn internal_adder_test() {
-		let res = internal_adder(3, 2);
-		assert_eq!(res, 5);
-		
-	}
-	
-
-	
-}
-	
