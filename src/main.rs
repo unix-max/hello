@@ -4,24 +4,11 @@ struct Restangle {
 	height: u32
 }
 fn main() {
-	let mut list = [
-		Restangle { width: 10, height: 1},
-		Restangle { width: 3, height: 5},
-		Restangle { width: 7, height: 12},
-		Restangle { width: 9, height: 12},
-		Restangle { width: 10, height: 1},
-		Restangle { width: 3, height: 5},
-		Restangle { width: 7, height: 12},
-		Restangle { width: 9, height: 12}
-	];
-	
-	let mut nom = 0;
-
-	list.sort_by_key(|r| {
-		nom +=1;
-		r.width
-	});
-	println!("list {list:#?} sorted in {nom} sort operation");
+let conv = vec![|x: i32| -> i32 { x + 1 }, |x| x+2, |x| x+3];
+for (index , clos) in conv.iter().enumerate() {
+	let a = clos(10+ index as i32);
+	println!("It`s a {a}");
+}
 }
 
 
