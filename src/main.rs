@@ -1,14 +1,23 @@
-#[derive(Debug)]
-struct Restangle {
-	width: u32,
-	height: u32
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // methods with default implementations elided
 }
 fn main() {
-let conv = vec![|x: i32| -> i32 { x + 1 }, |x| x+2, |x| x+3];
-for (index , clos) in conv.iter().enumerate() {
-	let a = clos(10+ index as i32);
-	println!("It`s a {a}");
-}
+let v1 = vec![1,2,3];
+let mut v1_iter = v1.iter();
+let a = v1_iter.next().unwrap_or_else(|| {println!("end iter"); &0});
+println!("Value iter 1 {a}");
+let a = v1_iter.next().unwrap_or_else(|| {println!("end iter"); &0});
+println!("Value iter 2 {a}");
+let a = v1_iter.next().unwrap_or_else(|| {println!("end iter"); &0});
+println!("Value iter 3 {a}");
+let a = v1_iter.next().unwrap_or_else(|| {println!("end iter"); &0});
+println!("Value iter 4 {a}");
+
+
 }
 
 
