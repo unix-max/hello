@@ -1,14 +1,22 @@
-use std::thread;
+#[derive(Debug)]
+struct Restangle {
+	width: u32,
+	height: u32
+}
 fn main() {
+	let mut list = [
+		Restangle { width: 10, height: 1},
+		Restangle { width: 3, height: 5},
+		Restangle { width: 7, height: 12}
+	];
+	let mut sort_operation = vec![];
+	let value = String::from("Closure called");
 
-	let list = vec![1, 2, 3, 7];
-	println!(" Before defining closure {list:?}");
-
-	thread::spawn(move || println!("From closure {list:?}"))
-		.join()
-		.unwrap();
-	
-	//println!("After calling closure {list:?}");
+	list.sort_by_key(|r| {
+		sort_operation.push(value);
+		r.width
+	});
+	println!("list {list:#?}")
 }
 
 
