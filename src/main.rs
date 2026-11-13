@@ -7,16 +7,12 @@ pub trait Iterator {
 }
 fn main() {
 let v1 = vec![1,2,3];
-let mut v1_iter = v1.iter();
-let a = v1_iter.next().unwrap_or_else(|| {println!("end iter"); &0});
-println!("Value iter 1 {a}");
-let a = v1_iter.next().unwrap_or_else(|| {println!("end iter"); &0});
-println!("Value iter 2 {a}");
-let a = v1_iter.next().unwrap_or_else(|| {println!("end iter"); &0});
-println!("Value iter 3 {a}");
-let a = v1_iter.next().unwrap_or_else(|| {println!("end iter"); &0});
-println!("Value iter 4 {a}");
-
+let v1_map  = v1.iter().map(|x| x+1);
+let sum: i32 = v1_map.sum();
+println!("Summ of iter {sum}");
+let v1_map  = v1.iter().map(|x| x+1);
+let v2: Vec<i32> = v1_map.collect();
+println!("New collect from map {v2:?}")
 
 }
 
