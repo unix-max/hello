@@ -1,9 +1,6 @@
-[package]
-name = "hello"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
+[workspace]
+resolver = "3"
+members = ["adder", "add_one", "add_two"]
 
 [profile.release]
 opt-level = "z"        # Оптимизация по размеру (можно попробовать "s" или "z", где "z" сильнее сжимает)
