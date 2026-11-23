@@ -1,3 +1,4 @@
+
 struct CustomSmartPointer {
 	data: String
 }
@@ -11,6 +12,8 @@ fn main() {
 	let c = CustomSmartPointer {
 		data: String::from("My stuff")
 	};
+	println!("CustomSmartPointer C created !");
+	drop(c);
 	let d = CustomSmartPointer {
 		data: String::from("Other stuff")
 	};
