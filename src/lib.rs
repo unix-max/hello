@@ -53,11 +53,7 @@ mod tests {
 	}
 	impl Messenger for MockMessenger {
 		fn send(&self, msg: &str) {
-			let mut mut_ref_a = self.sent_messeges.borrow_mut();
-			let mut mut_ref_b = self.sent_messeges.borrow_mut();
-			mut_ref_a.push(String::from(msg));
-			mut_ref_b.push(String::from(msg));
-			//self.sent_messeges.borrow_mut().push(String::from(msg));
+			self.sent_messeges.borrow_mut().push(String::from(msg));
 		}
 	}
 
@@ -67,6 +63,6 @@ mod tests {
 		let mut limit_tracker = LimitTracker::new(&mock_messenger, 100);
 
 		limit_tracker.set_value(80);
-		assert_eq!(mock_messenger.sent_messeges.borrow().len(), 2);
+		assert_eq!(mock_messenger.sent_messeges.borrow().len(), 1);
 	}
 }
