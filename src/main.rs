@@ -7,10 +7,11 @@ fn main() {
 			thread::sleep(Duration::from_millis(1));
 		}
 	});
+	handle.join().unwrap();
 	for i in 0..5 {
 			println!("hi number {i} from the main thread");
 			thread::sleep(Duration::from_millis(5));
 			
 		}
-	handle.join().unwrap();
+	
 }
